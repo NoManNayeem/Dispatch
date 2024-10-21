@@ -1,0 +1,49 @@
+<!-- chat_list.html -->
+{% extends 'accounts/base.html' %}
+
+{% block title %}My Chats - Dispatch{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center">Chats</h1>
+    <p class="text-center lead">Your active conversations.</p>
+
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search users..." id="chat-search-input">
+    </div>
+
+    {% if chats %}
+        <div class="list-group">
+            {% for chat in chats %}
+                {% for participant in chat.participants.all %}
+                    {% if participant != request.user %}
+                        <a href="{% url 'chat_with_user' participant.id %}" class="list-group-item list-group-item-action">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ participant.username }}</strong>
+                                    <p class="mb-0">
+                                        {% if chat.messages.last %}
+                                            "{{ chat.messages.last.content|truncatewords:10 }}"
+                                        {% else %}
+                                            No messages yet.
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                {% if participant.profile.picture %}
+                                    <img src="{{ participant.profile.picture.url }}" class="rounded-circle" width="40" height="40" alt="{{ participant.username }}">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/40" class="rounded-circle" alt="Profile">
+                                {% endif %}
+                            </div>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">
+            You have no active chats. <a href="{% url 'friend_list' %}">Find friends</a> to start a conversation!
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Friend Requests - Dispatch{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center">Friend Requests</h1>
+    <p class="text-center lead">Manage your pending friend requests.</p>
+
+    <!-- Friend Requests List -->
+    {% if friend_requests %}
+        <div class="row g-4">
+            {% for request in friend_requests %}
+                <div class="col-sm-6 col-md-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-center">
+                            
+                            <!-- Profile Picture -->
+                            <img src="{% if request.from_user.profile.picture %}{{ request.from_user.profile.picture.url }}{% else %}https://via.placeholder.com/100{% endif %}" 
+                                 class="rounded-circle mb-3" alt="{{ request.from_user.username }}" width="100" height="100" style="object-fit: cover;">
+                            
+                            <!-- Username -->
+                            <h5 class="card-title">{{ request.from_user.username }}</h5>
+                            
+                            <!-- Email -->
+                            <p class="card-text text-muted">{{ request.from_user.email }}</p>
+                            
+                            <!-- Accept and Decline Buttons -->
+                            <div class="d-grid gap-2">
+                                <a href="{% url 'accept_friend_request' request.id %}" class="btn btn-success">
+                                    <i class="fas fa-check"></i> Accept
+                                </a>
+                                <a href="{% url 'decline_friend_request' request.id %}" class="btn btn-danger">
+                                    <i class="fas fa-times"></i> Decline
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- No Friend Requests Alert -->
+        <div class="alert alert-info text-center">
+            You have no pending friend requests.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

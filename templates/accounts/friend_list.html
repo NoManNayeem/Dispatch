@@ -1,0 +1,60 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Your Friends - Dispatch{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center">Your Friends</h1>
+    <p class="text-center lead">These are your current friends on Dispatch.</p>
+
+    <!-- Friends List -->
+    {% if friends %}
+        <div class="row g-4">
+            {% for friend in friends %}
+                <div class="col-sm-6 col-md-4">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <!-- Profile Picture -->
+                            {% if friend.from_user == request.user %}
+                                <img src="{% if friend.to_user.profile.picture %}{{ friend.to_user.profile.picture.url }}{% else %}https://via.placeholder.com/100{% endif %}" 
+                                     class="rounded-circle mb-3" alt="{{ friend.to_user.username }}" width="100" height="100" style="object-fit: cover;">
+                                <h5 class="card-title">{{ friend.to_user.username }}</h5>
+                                <p class="card-text text-muted">{{ friend.to_user.email }}</p>
+                            {% else %}
+                                <img src="{% if friend.from_user.profile.picture %}{{ friend.from_user.profile.picture.url }}{% else %}https://via.placeholder.com/100{% endif %}" 
+                                     class="rounded-circle mb-3" alt="{{ friend.from_user.username }}" width="100" height="100" style="object-fit: cover;">
+                                <h5 class="card-title">{{ friend.from_user.username }}</h5>
+                                <p class="card-text text-muted">{{ friend.from_user.email }}</p>
+                            {% endif %}
+                            
+                            <!-- Chat, Call, and Video Call Buttons -->
+                            <div class="d-grid gap-2">
+                                <!-- Chat Button (Links to user-to-user chat) -->
+                                <a href="{% if friend.from_user == request.user %}{% url 'chat_with_user' friend.to_user.id %}{% else %}{% url 'chat_with_user' friend.from_user.id %}{% endif %}" 
+                                   class="btn btn-outline-primary w-100">
+                                    <i class="fas fa-comments"></i> Chat
+                                </a>
+
+                                <!-- Phone Call Button (Placeholder for future functionality) -->
+                                <a href="#" class="btn btn-outline-success w-100">
+                                    <i class="fas fa-phone"></i> Phone Call
+                                </a>
+
+                                <!-- Video Call Button (Placeholder for future functionality) -->
+                                <a href="#" class="btn btn-outline-danger w-100">
+                                    <i class="fas fa-video"></i> Video Call
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <!-- No Friends Message -->
+        <div class="alert alert-warning text-center">
+            You don't have any friends yet. <a href="{% url 'all_users' %}">Find friends</a> to connect!
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

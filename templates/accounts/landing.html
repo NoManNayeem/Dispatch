@@ -1,0 +1,67 @@
+{% extends 'accounts/public_base.html' %}
+
+{% block title %}Welcome to Dispatch{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section bg-primary text-white text-center py-5">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Connect, Chat, and Call with Dispatch</h1>
+        <p class="lead">Stay connected with friends and family through messaging, voice, and video calls. Sign up today!</p>
+        <a href="{% url 'register' %}" class="btn btn-light btn-lg mt-4 mx-2"><i class="fas fa-user-plus"></i> Get Started</a>
+        <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg mt-4 mx-2"><i class="fas fa-sign-in-alt"></i> Login</a>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section py-5 bg-light text-center">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Why Dispatch?</h2>
+        <p class="lead mb-5">Discover the best way to stay in touch with friends and family, no matter where you are.</p>
+        
+        <div class="row g-4">
+            <!-- Chat Feature -->
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <i class="fas fa-comments fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Real-time Chat</h5>
+                        <p class="card-text">Send instant messages and stay connected with friends and family.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Voice Call Feature -->
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <i class="fas fa-phone fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Crystal Clear Voice Calls</h5>
+                        <p class="card-text">Make high-quality voice calls from anywhere, anytime.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Call Feature -->
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <i class="fas fa-video fa-3x text-danger mb-3"></i>
+                        <h5 class="card-title">High-Definition Video Calls</h5>
+                        <p class="card-text">Connect with friends face-to-face through high-quality video calls.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta-section text-center py-5 bg-primary text-white">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Join Dispatch Today!</h2>
+        <p class="lead">Create your account and start chatting, calling, and video calling in seconds.</p>
+        <a href="{% url 'register' %}" class="btn btn-light btn-lg"><i class="fas fa-user-plus"></i> Register Now</a>
+    </div>
+</section>
+{% endblock %}

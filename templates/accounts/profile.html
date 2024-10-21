@@ -1,0 +1,39 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block title %}Profile - Dispatch{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    
+                    <!-- Profile Picture -->
+                    <img src="{% if profile.picture %}{{ profile.picture.url }}{% else %}https://via.placeholder.com/150{% endif %}" 
+                         class="rounded-circle mb-3" alt="{{ user.username }}'s Profile Picture" width="150" height="150" style="object-fit: cover;">
+
+                    <!-- Username -->
+                    <h3 class="mb-3">{{ user.username }}</h3>
+
+                    <!-- Email -->
+                    <p class="mb-2"><strong>Email:</strong> {{ user.email }}</p>
+
+                    <!-- Bio -->
+                    {% if profile.bio %}
+                        <p class="mb-4"><strong>Bio:</strong> {{ profile.bio }}</p>
+                    {% else %}
+                        <p class="text-muted mb-4"><em>No bio available</em></p>
+                    {% endif %}
+
+                    <!-- Edit Profile Button -->
+                    <a href="{% url 'edit_profile' %}" class="btn btn-secondary">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

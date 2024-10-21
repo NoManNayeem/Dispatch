@@ -1,0 +1,58 @@
+# Python specific
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+wheels/
+*.manifest
+*.spec
+
+# Django specific
+*.log
+*.pot
+*.py[cod]
+__pycache__/
+db.sqlite3
+db.sqlite3-journal
+local_settings.py
+
+# If you are using PostgreSQL:
+*.pgpass
+
+# If you are using MySQL:
+*.sql
+
+# Media/uploads (for user-uploaded files)
+media/
+# If you're storing static files that should not be committed
+staticfiles/
+
+# VS Code specific (if you're using it)
+.vscode/
+
+# Environment variables and secrets (add the name of your env file if necessary)
+.env
+*.env
+
+# Virtual environments (if you're using one)
+venv/
+.env/
+.venv/
+
+# macOS system files
+.DS_Store
+
+# Redis dump file
+dump.rdb
+
+# Ignore Channels routing and Daphne specific logs
+logs/
+*.pid
