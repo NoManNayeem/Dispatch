@@ -24,6 +24,9 @@ INSTALLED_APPS = [
     # Local apps
     'accounts',
     'chat',
+    
+    'video_call',
+    'audio_call',
 ]
 
 MIDDLEWARE = [
